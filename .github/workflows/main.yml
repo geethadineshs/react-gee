@@ -25,7 +25,7 @@ jobs:
       run: npm run build
 
     - name: pull the latest files in github
-      uses: appleboy/ssh-action@master
+      uses: appleboy/ssh-action@main
       with:
         host: ${{ secrets.SSH_HOST }}
         username: ${{ secrets.SSH_UNAME }}
