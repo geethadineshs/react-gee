@@ -22,7 +22,7 @@ jobs:
       run: npm install
 
     - name: Build the React app
-      run: npm run build
+      run: npm run build #build
 
     - name: copy file via ssh key
       uses: appleboy/scp-action@v0.1.7
