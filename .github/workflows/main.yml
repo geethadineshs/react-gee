@@ -11,10 +11,10 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Set up Node.js
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v4
       with:
         node-version: '20.15.1'
 
@@ -24,12 +24,12 @@ jobs:
     - name: Build the React app
       run: npm run build
 
-    - name: pull the latest files in github
-      uses: appleboy/ssh-action@main
+    - name: copy file via ssh key
+      uses: appleboy/scp-action@v0.1.7
       with:
-        host: ${{ secrets.SSH_HOST }}
-        username: ${{ secrets.SSH_UNAME }}
-        key: ${{ secrets.SSH_KEY }}
-        port: 22
-        script: |
-          mkdir demo
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME || 'ubuntu'}}
+        port: ${{ secrets.PORT || 22 }}
+        key: ${{ secrets.KEY }}
+        source: "build/*"
+        target: /home/ubuntu/react
